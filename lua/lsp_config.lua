@@ -2,6 +2,7 @@ local nvim_lsp = require('nvim_lsp')
 local completion = require('completion')
 
 local status = require('lib.lsp_status')
+local os_check = require('lib.os_check')
 
 local mapper = function(mode, key, result)
   vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
@@ -54,15 +55,27 @@ nvim_lsp.vimls.setup({
 })
 
 -- Lua
--- TODO: Implement for unix systems
-nvim_lsp.sumneko_lua.setup({
-  cmd = {
-    'S:/Dev/misc/lua-language-server/bin/Windows/lua-language-server.exe',
-    '-E',
-    'S:/Dev/misc/lua-language-server/main.lua',
-  },
-  on_attach = custom_attach,
-})
+os = os_check.get()
+
+if os == "win" then
+  nvim_lsp.sumneko_lua.setup({
+    cmd = {
+      'S:/Dev/misc/lua-language-server/bin/Windows/lua-language-server.exe',
+      '-E',
+      'S:/Dev/misc/lua-language-server/main.lua',
+    },
+    on_attach = custom_attach,
+  })
+elseif os == "unix" then
+  nvim_lsp.sumneko_lua.setup({
+    cmd = {
+      '/home/taras/tmp/lua-language-server/bin/Linux/lua-language-server',
+      '-E',
+      '/home/taras/tmp/lua-language-server/main.lua',
+    },
+    on_attach = custom_attach,
+  })
+end
 
 -- Typescript
 nvim_lsp.tsserver.setup({
