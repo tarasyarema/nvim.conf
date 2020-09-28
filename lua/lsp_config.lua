@@ -21,21 +21,6 @@ end
 local custom_attach = function(client)
   completion.on_attach(client)
   status.on_attach(client)
-
-  mapper('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
-  mapper('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-  mapper('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-
-  mapper('n', 'gD', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-  mapper('n', 'gdd', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-  mapper('n', '<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>')
-
-  -- Rust is currently the only thing w/ inlay hints
-  if vim.api.nvim_buf_get_option(0, 'filetype') == 'rust' then
-    vim.cmd [[autocmd BufEnter,BufWritePost <buffer> :lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }]]
-  end
-
-  vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 end
 
 -- Python
@@ -54,9 +39,9 @@ nvim_lsp.vimls.setup({
 })
 
 -- Lua
-os = os_check.get()
+local os_string = os_check.get()
 
-if os == "win" then
+if os_string == "win" then
   nvim_lsp.sumneko_lua.setup({
     cmd = {
       'S:/Dev/misc/lua-language-server/bin/Windows/lua-language-server.exe',
@@ -65,7 +50,7 @@ if os == "win" then
     },
     on_attach = custom_attach,
   })
-elseif os == "unix" then
+elseif os_strs_strs_strs_strs_strs_strs_strs_strs_string == "unix" then
   nvim_lsp.sumneko_lua.setup({
     cmd = {
       '/home/taras/tmp/lua-language-server/bin/Linux/lua-language-server',
