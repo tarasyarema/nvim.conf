@@ -14,8 +14,6 @@ status.activate()
 local minimal_attach = function(client)
   completion.on_attach(client)
   status.on_attach(client)
-
-  vim.cmd("setlocal omnifunc=v:lua.vim.lsp.omnifunc")
 end
 
 local custom_attach = function(client)
@@ -73,3 +71,12 @@ nvim_lsp.rust_analyzer.setup({
   on_attach = custom_attach,
 })
 
+-- Clang
+nvim_lsp.clangd.setup({
+  on_attach = custom_attach,
+})
+
+-- Json
+nvim_lsp.jsonls.setup({
+  on_attach = custom_attach,
+})
