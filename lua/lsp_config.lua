@@ -22,14 +22,13 @@ local custom_attach = function(client)
   completion.on_attach(client)
   status.on_attach(client)
 
-  -- mapper('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>')
-  -- mapper('n', '1gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-
   mapper('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   mapper('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-  mapper('n', '<Leader>gD', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-  mapper('n', '<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>')
   mapper('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+
+  mapper('n', 'gD', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+  mapper('n', 'gdd', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+  mapper('n', '<Leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>')
 
   -- Rust is currently the only thing w/ inlay hints
   if vim.api.nvim_buf_get_option(0, 'filetype') == 'rust' then
