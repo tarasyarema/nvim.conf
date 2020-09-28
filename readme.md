@@ -23,14 +23,22 @@ Just clone in your Neovim root folder:
 The keybindings (for all the languages) are the following:
 
 - Go to definition: `gd`
+- Go to declaration: `gdd`
+- Get implementation: `gD`
 - Get references: `gr`
-- Get implementation: `<Leader>gD`
-- Rename: `<Leader>cr`
+- Rename: `gR`
+- Document symbol: `g0`
+- Workspace symbol: `gW`
+- Move to new diagnostic: `<Leader>dn`
+- Move to previous diagnostic: `<Leader>dp`
 - Hover info: `K`
+- Signature help: `<c-k>`
 - Toggle completition: `<c-p>`
 - Move in completition menu: `<c-n>` and `<c-p>`
 
-Note that the keybindings are, for the moment, on the `lua/lsp_config.lua` file.
+There is auto formatting for C, Python and Rust. Golang too, but not via the LSP, see below.
+
+Rust may have also inlay hints.
 
 #### Go
 
@@ -61,6 +69,14 @@ Check [docs #tsserver](https://github.com/neovim/nvim-lspconfig#tsserver) to ins
 #### Rust
 
 Check [docs #rust_analyzer](https://github.com/neovim/nvim-lspconfig#rust_analyzer) to install.
+
+#### Clangd
+
+Check [docs #clangd](https://github.com/neovim/nvim-lspconfig#clangd) to install.
+
+#### Jsonls
+
+Check [docs #jsonls](https://github.com/neovim/nvim-lspconfig#jsonls) to install.
 
 ## Non-TUI Clients
 
