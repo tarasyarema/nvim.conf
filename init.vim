@@ -45,8 +45,8 @@ Plug 'lervag/vimtex'
 " Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Notes related
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-notes'
 
 " Neovim built in LSP
 Plug 'neovim/nvim-lspconfig'
@@ -105,7 +105,6 @@ set shortmess+=I
 " Number configurations
 set relativenumber
 set number	
-set numberwidth=4
 
 " Line break config
 set textwidth=0
@@ -172,7 +171,7 @@ set modelines=1
 
 " Clipboard
 " Always have the clipboard be the same as my regular clipboard
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 
 set inccommand=split
 set list
@@ -197,7 +196,7 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <esc> :noh<return><esc>
 
 " NERD Tree
-map <Leader>a :NERDTree<CR>
+map <Leader>a :NERDTreeToggle<CR>
 
 " Fuzzy related
 map <Leader>o :GFiles<CR>
@@ -209,9 +208,8 @@ let g:use_telescope = 1
 " Telescope config
 if g:use_telescope
 lua <<EOF
--- totally optional to use setup
 require('telescope').setup{
-  defaults = {}
+    defaults = {}
 }
 EOF
 
@@ -270,4 +268,5 @@ inoremap <silent><expr> <c-p> completion#trigger_completion()
 set completeopt=menuone,noinsert,noselect " Set completeopt to have a better completion experience
 set shortmess+=c " Avoid showing message extra message when using completion
 
-
+" GUI options
+set guifont=MesloLGL\ Nerd\ Font\ Mono:h14
