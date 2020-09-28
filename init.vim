@@ -76,6 +76,29 @@ endif
 " LSP related
 lua require('init')
 
+let g:use_nvim_lsp = 1
+
+if g:use_nvim_lsp
+    setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+    nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+    nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <silent> gdd    <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+    nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+    nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
+    nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+    nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+    augroup NvimLSP
+        autocmd!
+        autocmd BufWritePre *.c,*.py,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+        autocmd BufEnter,BufWritePost <buffer> *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
+    augroup END
+end
+
 " Golang related
 let g:gofmt_exe = 'goimports'
 let g:gofmt_on_save = 1
@@ -203,14 +226,13 @@ map <Leader>o :GFiles<CR>
 map <Leader>O :tabnew<CR>:GFiles<CR>
 map <Leader>rg :Rg<SPACE>
 
-let g:use_telescope = 1
-
 " Telescope config
+let g:use_telescope = 1
 if g:use_telescope
 lua <<EOF
-require('telescope').setup{
-    defaults = {}
-}
+    require('telescope').setup{
+        defaults = {}
+    }
 EOF
 
     map <Leader>o :lua require'telescope.builtin'.git_files{}<CR>
@@ -269,4 +291,4 @@ set completeopt=menuone,noinsert,noselect " Set completeopt to have a better com
 set shortmess+=c " Avoid showing message extra message when using completion
 
 " GUI options
-set guifont=MesloLGL\ Nerd\ Font\ Mono:h14
+set guifont=MesloLGL\ Nerd\ Font\ Mono:h13
