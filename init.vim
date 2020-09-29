@@ -5,7 +5,6 @@ call plug#begin()
 " Status bar
 Plug 'bling/vim-airline'
 
-
 " Fuzzy search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -35,8 +34,6 @@ Plug 'jiangmiao/auto-pairs'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-
-" Misc
 
 " Track coding time
 Plug 'wakatime/vim-wakatime'
@@ -71,12 +68,11 @@ Plug 'neovim/nvim-lspconfig'
 
 " Custom language related plugins
 Plug 'tjdevries/nlua.nvim'          " Lua development
-Plug 'nvim-lua/lsp-status.nvim'     " Lua statusline 
+Plug 'nvim-lua/lsp-status.nvim'     " Lua statusline
 Plug 'euclidianAce/BetterLua.vim'   " Better lua
+Plug 'nvim-lua/completion-nvim'     " Better LSP completition
 
-Plug 'tweekmonster/gofmt.vim'
-
-Plug 'nvim-lua/completion-nvim' " Better LSP completition
+Plug 'tweekmonster/gofmt.vim'       " gofmt/goimport
 
 call plug#end()
 

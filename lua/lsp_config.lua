@@ -48,7 +48,7 @@ if os_string == "win" then
     },
     on_attach = custom_attach,
   })
-elseif os_strs_strs_strs_strs_strs_strs_strs_strs_string == "unix" then
+elseif os_string == "unix" then
   nvim_lsp.sumneko_lua.setup({
     cmd = {
       '/home/taras/tmp/lua-language-server/bin/Linux/lua-language-server',
