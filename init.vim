@@ -15,12 +15,17 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
 
-" I dont know...
-" Plug 'dense-analysis/ale'
+" Themes :3
 Plug 'morhetz/gruvbox'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'srcery-colors/srcery-vim'
+Plug 'arcticicestudio/nord-vim'
 
-" TRee/directory explorer
+" Tree/directory explorer
 Plug 'preservim/nerdtree' 
+
+" Autopairs
+Plug 'jiangmiao/auto-pairs'
 
 " Coc
 " For the moment I will try to configure native Neovim LSP
@@ -32,11 +37,21 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Misc
+
+" Track coding time
 Plug 'wakatime/vim-wakatime'
+
+" Markdown live preview via browser
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
+" Editorconfig auto detect
 " Plug 'editorconfig/editorconfig-vim'
-" Plug 'preservim/nerdcommenter'
-Plug 'tpope/vim-commentary'
+
+" Comment stuff
+Plug 'tpope/vim-commentary' 
+
+" Distraction free editing
+Plug 'junegunn/goyo.vim'
 
 " Auto configure indentation
 Plug 'tpope/vim-sleuth'
@@ -59,11 +74,9 @@ Plug 'tjdevries/nlua.nvim'          " Lua development
 Plug 'nvim-lua/lsp-status.nvim'     " Lua statusline 
 Plug 'euclidianAce/BetterLua.vim'   " Better lua
 
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tweekmonster/gofmt.vim'
 
 Plug 'nvim-lua/completion-nvim' " Better LSP completition
-
 
 call plug#end()
 
@@ -127,8 +140,15 @@ let mapleader=" "
 set nocompatible
 syntax on
 
+" Am I a joke to you?
 set background=dark
+
+" Theme :3
 colorscheme gruvbox
+" colorscheme nord
+" colorscheme srcery
+" colorscheme vim-monokai-tasty
+
 set t_Co=256
 
 " Disable startup message
