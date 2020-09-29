@@ -36,6 +36,7 @@ Plug 'wakatime/vim-wakatime'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-commentary'
 
 " Auto configure indentation
 Plug 'tpope/vim-sleuth'
