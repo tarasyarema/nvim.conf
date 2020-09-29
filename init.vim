@@ -113,8 +113,8 @@ if g:use_nvim_lsp
     augroup END
 
     " Custom LSP diagnostics signs
-    sign define LspDiagnosticsErrorSign text=E linehl=ErrorMsg texthl=LspDiagnosticsError numhl=
-    sign define LspDiagnosticsWarningSign text=W linehl=MoreMsg texthl=LspDiagnosticsWarningSign numhl=
+    " sign define LspDiagnosticsErrorSign text=E linehl=ErrorMsg texthl=LspDiagnosticsError numhl=
+    " sign define LspDiagnosticsWarningSign text=W linehl=MoreMsg texthl=LspDiagnosticsWarningSign numhl=
 end
 
 " Golang related
@@ -257,7 +257,7 @@ map <Leader>O :tabnew<CR>:GFiles<CR>
 map <Leader>rg :Rg<SPACE>
 
 " Telescope config
-let g:use_telescope = 1
+let g:use_telescope = 0
 if g:use_telescope
 lua <<EOF
     require('telescope').setup{
