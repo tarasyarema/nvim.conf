@@ -80,3 +80,8 @@ nvim_lsp.clangd.setup({
 nvim_lsp.jsonls.setup({
   on_attach = custom_attach,
 })
+
+-- PHP
+nvim_lsp.intelephense.setup({
+  on_attach = custom_attach,
+})
