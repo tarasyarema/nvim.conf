@@ -5,6 +5,7 @@ call plug#begin()
 " Status bar
 Plug 'bling/vim-airline'
 
+
 " Fuzzy search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -28,6 +29,7 @@ Plug 'preservim/nerdtree'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Misc
 Plug 'wakatime/vim-wakatime'
@@ -91,14 +93,18 @@ if g:use_nvim_lsp
     nnoremap <silent> gR            <cmd>lua vim.lsp.buf.rename()<CR>
     nnoremap <silent> g0            <cmd>lua vim.lsp.buf.document_symbol()<CR>
     nnoremap <silent> gW            <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-    nnoremap <silent> <Leader>dn    <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_next_diagnostic()<CR>
-    nnoremap <silent> <Leader>dp    <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_prev_diagnostic()<CR>
+    nnoremap <silent> <Leader>[     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_next_diagnostic()<CR>
+    nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_prev_diagnostic()<CR>
 
     augroup NvimLSP
         autocmd!
         autocmd BufWritePre *.c,*.py,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
         autocmd BufEnter,BufWritePost *.rs :lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
     augroup END
+
+    " Custom LSP diagnostics signs
+    sign define LspDiagnosticsErrorSign text=E linehl=ErrorMsg texthl=LspDiagnosticsError numhl=
+    sign define LspDiagnosticsWarningSign text=W linehl=MoreMsg texthl=LspDiagnosticsWarningSign numhl=
 end
 
 " Golang related
@@ -193,6 +199,11 @@ set expandtab
 set foldmethod=marker
 set foldlevel=0
 set modelines=1
+
+" Set the gutter padding
+" so it doesnt blink when errors
+" or git gutters
+set signcolumn=yes
 
 " Clipboard
 " Always have the clipboard be the same as my regular clipboard
