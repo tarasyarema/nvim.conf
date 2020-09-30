@@ -75,6 +75,8 @@ Plug 'nvim-lua/completion-nvim'     " Better LSP completition
 
 Plug 'tweekmonster/gofmt.vim'       " gofmt/goimport
 
+Plug 'ziglang/zig.vim'              " Zig language support
+
 call plug#end()
 
 let g:has_coc = 0
@@ -121,6 +123,9 @@ end
 " Golang related
 let g:gofmt_exe = 'goimports'
 let g:gofmt_on_save = 1
+
+" Ziglang related
+let g:zig_fmt_autosave = 1
 
 " Python related
 if has("win32")
