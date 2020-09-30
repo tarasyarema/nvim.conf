@@ -65,6 +65,7 @@ Plug 'lervag/vimtex'
 
 " Neovim built in LSP
 Plug 'neovim/nvim-lspconfig'
+Plug 'tjdevries/lsp_extensions.nvim'
 
 " Custom language related plugins
 Plug 'tjdevries/nlua.nvim'          " Lua development
