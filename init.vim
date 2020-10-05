@@ -77,6 +77,12 @@ Plug 'tweekmonster/gofmt.vim'       " gofmt/goimport
 
 Plug 'ziglang/zig.vim'              " Zig language support
 
+" Language check
+Plug 'dpelle/vim-LanguageTool'
+
+" Because why not
+Plug 'ThePrimeagen/vim-apm'
+
 call plug#end()
 
 let g:has_coc = 0
@@ -328,3 +334,9 @@ set shortmess+=c " Avoid showing message extra message when using completion
 
 " GUI options
 set guifont=MesloLGL\ Nerd\ Font\ Mono:h13
+
+" LanguageTool settings
+if has("win32")
+    let g:languagetool_jar = "S:/Programs/LanguageTool-5.1/languagetool-commandline.jar"
+    let g:languagetool_lang = "ca"
+end
