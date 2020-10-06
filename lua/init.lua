@@ -8,5 +8,6 @@ end
 return init({
     packages = {
         'lsp_config',
+        'go',
     }
 })

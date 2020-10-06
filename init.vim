@@ -73,7 +73,8 @@ Plug 'nvim-lua/lsp-status.nvim'     " Lua statusline
 Plug 'euclidianAce/BetterLua.vim'   " Better lua
 Plug 'nvim-lua/completion-nvim'     " Better LSP completition
 
-Plug 'tweekmonster/gofmt.vim'       " gofmt/goimport
+" Now this can be done natively
+" Plug 'tweekmonster/gofmt.vim'       " gofmt/goimport
 
 Plug 'ziglang/zig.vim'              " Zig language support
 
@@ -127,8 +128,10 @@ if g:use_nvim_lsp
 end
 
 " Golang related
-let g:gofmt_exe = 'goimports'
-let g:gofmt_on_save = 1
+" let g:gofmt_exe = 'goimports'
+" let g:gofmt_on_save = 1
+
+autocmd BufWritePre *.go lua goimports(1000)
 
 " Ziglang related
 let g:zig_fmt_autosave = 1

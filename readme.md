@@ -44,10 +44,13 @@ Rust may have also inlay hints.
 
 Lately I work with a lot of Golang so I wanted a fast and easy LSP config + formatting + auto imports. 
 I tried to use the vim-go plugin, but after an hour or so it would slow down the client and even freeze sometimes.
-As I only wanted the `goimports` on save function I found out [gofmt.vim](https://github.com/tweekmonster/gofmt.vim) which does just that.
-You just have to install `goimports`/`gofmt` and it will execute it on save. No freezes nor slows.
+~As I only wanted the `goimports` on save function I found out [gofmt.vim](https://github.com/tweekmonster/gofmt.vim) which does just that.
+You just have to install `goimports`/`gofmt` and it will execute it on save. No freezes nor slows.~
+Done natively with the Neovim LSP, check [lua/go.lua](./lua/go.lua).
 
 For the LSP client I use the builtin Neovim LSP.
+
+Check [docs #gopls](https://github.com/neovim/nvim-lspconfig#gopls) for more information.
 
 #### Python
 
