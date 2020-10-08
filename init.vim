@@ -336,7 +336,8 @@ set completeopt=menuone,noinsert,noselect " Set completeopt to have a better com
 set shortmess+=c " Avoid showing message extra message when using completion
 
 " GUI options
-set guifont=MesloLGL\ Nerd\ Font\ Mono:h13
+" set guifont=MesloLGLDZ_Nerd_Font_Mono:h15
+set guifont=Consolas:h14
 
 " LanguageTool settings
 if has("win32")
