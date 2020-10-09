@@ -19,6 +19,8 @@ Plug 'morhetz/gruvbox'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'srcery-colors/srcery-vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'jacoborus/tender.vim'
 
 " Tree/directory explorer
 Plug 'preservim/nerdtree' 
@@ -151,16 +153,25 @@ let mapleader=" "
 set nocompatible
 syntax on
 
+set t_Co=256
+
+if (has("termguicolors"))
+    set termguicolors
+endif
+
 " Am I a joke to you?
 set background=dark
 
 " Theme :3
-colorscheme gruvbox
+" colorscheme gruvbox
 " colorscheme nord
 " colorscheme srcery
 " colorscheme vim-monokai-tasty
+" colorscheme solarized
+colorscheme tender
 
-set t_Co=256
+
+let g:airline_theme = 'tender'
 
 " Disable startup message
 set shortmess+=I
