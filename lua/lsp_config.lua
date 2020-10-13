@@ -85,3 +85,9 @@ nvim_lsp.jsonls.setup({
 nvim_lsp.intelephense.setup({
   on_attach = custom_attach,
 })
+
+-- Java
+nvim_lsp.jdtls.setup({
+  on_attach = custom_attach,
+})
+
