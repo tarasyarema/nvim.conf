@@ -61,9 +61,18 @@ end
 
 -- Typescript
 nvim_lsp.tsserver.setup({
-  cmd = { "typescript-language-server", "--stdio" },
   on_attach = custom_attach,
 })
+
+-- Javascript static checker
+nvim_lsp.flow.setup{
+  on_attach = custom_attach,
+}
+
+-- HTML
+nvim_lsp.html.setup{
+  on_attach = custom_attach,
+}
 
 -- Rust
 nvim_lsp.rust_analyzer.setup({
