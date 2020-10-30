@@ -75,10 +75,12 @@ Plug 'nvim-lua/lsp-status.nvim'     " Lua statusline
 Plug 'euclidianAce/BetterLua.vim'   " Better lua
 Plug 'nvim-lua/completion-nvim'     " Better LSP completition
 
-" Now this can be done natively
-" Plug 'tweekmonster/gofmt.vim'       " gofmt/goimport
-
 Plug 'ziglang/zig.vim'              " Zig language support
+
+" C lang based formatting
+" By default it uses the Google style, if not .clang-format
+" file was given
+Plug 'rhysd/vim-clang-format'
 
 " Language check
 Plug 'dpelle/vim-LanguageTool'
@@ -120,8 +122,8 @@ if g:use_nvim_lsp
 
     augroup NvimLSP
         autocmd!
-        autocmd BufWritePre *.c,*.py,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
-        autocmd BufEnter,BufWritePost *.rs :lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
+        autocmd BufWritePre *.py,*.rs lua vim.lsp.buf.formatting_sync(nil, 2000)
+        autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
     augroup END
 
     " Custom LSP diagnostics signs
@@ -130,18 +132,22 @@ if g:use_nvim_lsp
 end
 
 " Golang related
-" let g:gofmt_exe = 'goimports'
-" let g:gofmt_on_save = 1
-
-autocmd BufWritePre *.go lua goimports(1000)
+" Autoformat
+autocmd BufWritePre *.go lua goimports(2000)
 
 " Ziglang related
+" Autoformatting
 let g:zig_fmt_autosave = 1
 
 " Python related
+" Windows shit
 if has("win32")
     let g:python3_host_prog = 'C:\Users\2pac\scoop\apps\python\current\python.EXE'
 endif
+
+" C/C++ related
+" Enable Clang auto fromatting on C based languages
+autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " ---------------------
 " General configuration
@@ -280,10 +286,19 @@ map <Leader>a :NERDTreeToggle<CR>
 " Fuzzy related
 map <Leader>o :GFiles<CR>
 map <Leader>O :tabnew<CR>:GFiles<CR>
+map <Leader>p :Files<CR>
 map <Leader>rg :Rg<SPACE>
 
 " Telescope config
-let g:use_telescope = 0
+if has("win32")
+    " Now this plugin is slower than Fzf...
+    " so I'm only using it on the Windows machine
+    " as speed is not affected here
+    let g:use_telescope = 1
+else
+    let g:use_telescope = 0
+end
+
 if g:use_telescope
 lua <<EOF
     require('telescope').setup{
