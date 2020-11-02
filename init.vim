@@ -88,6 +88,9 @@ Plug 'dpelle/vim-LanguageTool'
 " Because why not
 Plug 'ThePrimeagen/vim-apm'
 
+" Wiki :3
+Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 let g:has_coc = 0
