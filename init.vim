@@ -65,6 +65,9 @@ Plug 'lervag/vimtex'
 " Plug 'xolox/vim-misc'
 " Plug 'xolox/vim-notes'
 
+" Debugging
+Plug 'puremourning/vimspector'
+
 " Neovim built in LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/lsp_extensions.nvim'
