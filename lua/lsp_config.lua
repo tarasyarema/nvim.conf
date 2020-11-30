@@ -1,4 +1,4 @@
-local nvim_lsp = require('nvim_lsp')
+local nvim_lsp = require('lspconfig')
 local completion = require('completion')
 
 local status = require('lib.lsp_status')
@@ -96,7 +96,7 @@ nvim_lsp.intelephense.setup({
 })
 
 -- Java
-nvim_lsp.jdtls.setup({
-  on_attach = custom_attach,
-})
+-- nvim_lsp.jdtls.setup({
+--   on_attach = custom_attach,
+-- })
 
