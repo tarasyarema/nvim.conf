@@ -212,6 +212,9 @@ set backspace=indent,eol,start
 set noerrorbells visualbell t_vb=
 set belloff=all
 
+" mouse support
+set mouse+=a
+
 set noshowmode
 
 set cmdheight=1
