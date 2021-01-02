@@ -94,6 +94,9 @@ Plug 'ThePrimeagen/vim-apm'
 " Wiki :3
 Plug 'vimwiki/vimwiki'
 
+" SageMath
+Plug 'petRUShka/vim-sage'
+
 call plug#end()
 
 let g:has_coc = 0
