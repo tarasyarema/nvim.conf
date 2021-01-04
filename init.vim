@@ -25,6 +25,9 @@ Plug 'jacoborus/tender.vim'
 " Tree/directory explorer
 Plug 'preservim/nerdtree' 
 
+" Code context
+Plug 'wellle/context.vim'
+
 " Autopairs
 Plug 'jiangmiao/auto-pairs'
 
