@@ -21,12 +21,11 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jacoborus/tender.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'NLKNguyen/papercolor-theme'
 
 " Tree/directory explorer
 Plug 'preservim/nerdtree' 
-
-" Code context
-Plug 'wellle/context.vim'
 
 " Autopairs
 Plug 'jiangmiao/auto-pairs'
@@ -181,15 +180,21 @@ endif
 set background=dark
 
 " Theme :3
+colorscheme tender
+
 " colorscheme gruvbox
 " colorscheme nord
 " colorscheme srcery
 " colorscheme vim-monokai-tasty
+
+" Solarized config
+let g:solarized_termcolors=256
 " colorscheme solarized
-colorscheme tender
 
 
+" Airline theme
 let g:airline_theme = 'tender'
+
 
 " Disable startup message
 set shortmess+=I
