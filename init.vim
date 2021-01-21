@@ -43,7 +43,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'wakatime/vim-wakatime'
 
 " Markdown live preview via browser
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Editorconfig auto detect
 " Plug 'editorconfig/editorconfig-vim'
@@ -362,6 +362,13 @@ if has("win32")
 endif
 
 let g:vimtex_latexmk_continuous = 1
+
+" Markdown preview related
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+let g:mkdp_browser = 'brave'
+let g:mkdp_echo_preview_url = 1
 
 if empty(v:servername) && exists('*remote_startserver')
     call remote_startserver('VIM')
