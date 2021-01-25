@@ -17,3 +17,24 @@ function goimports(timeoutms)
 
     vim.lsp.buf.formatting()
 end
+
+function go_switch()
+    local buffer = vim.api.nvim_get_current_buf()
+    local full_name = vim.api.nvim_buf_get_name(buffer)
+    local filetype = vim.api.nvim_buf_get_option(buffer, 'filetype')
+
+    if filetype == "go" then
+        local is_test = false
+        local back_pad = 3 -- .go extension len
+        local ext = "." .. filetype
+
+        local name = string.sub(full_name, 1, string.len(full_name) - back_pad)
+        if string.match(name, "_test") ~= -1 then
+            is_test = true
+            back_pad = 8
+            ext = "_test" .. ext
+        end
+
+        vim.cmd("vs " .. name .. ext)
+    end
+end

@@ -2,7 +2,6 @@ local nvim_lsp = require('lspconfig')
 local completion = require('completion')
 
 local status = require('lib.lsp_status')
-local os_check = require('lib.os_check')
 
 local mapper = function(mode, key, result)
   vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
@@ -37,27 +36,50 @@ nvim_lsp.vimls.setup({
 })
 
 -- Lua
-local os_string = os_check.get()
+local sumneko_root_path
+local system_name
 
-if os_string == "win" then
-  nvim_lsp.sumneko_lua.setup({
-    cmd = {
-      'S:/Dev/misc/lua-language-server/bin/Windows/lua-language-server.exe',
-      '-E',
-      'S:/Dev/misc/lua-language-server/main.lua',
-    },
-    on_attach = custom_attach,
-  })
-elseif os_string == "unix" then
-  nvim_lsp.sumneko_lua.setup({
-    cmd = {
-      '/home/taras/tmp/lua-language-server/bin/Linux/lua-language-server',
-      '-E',
-      '/home/taras/tmp/lua-language-server/main.lua',
-    },
-    on_attach = custom_attach,
-  })
+if vim.fn.has("mac") == 1 then
+  sumneko_root_path = "/Users/taras/tmp/lua-language-server"
+  system_name = "macOS"
+elseif vim.fn.has("unix") == 1 then
+  sumneko_root_path = "/home/taras/tmp/lua-language-server"
+  system_name = "Linux"
+elseif vim.fn.has('win32') == 1 then
+  sumneko_root_path = "S:/Dev/misc/lua-language-server"
+  system_name = "Windows"
+else
+  print("Unsupported system for sumneko")
 end
+
+-- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
+local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+
+nvim_lsp.sumneko_lua.setup({
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = vim.split(package.path, ';'),
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+    },
+  },
+  on_attach = custom_attach,
+})
 
 -- Typescript
 nvim_lsp.tsserver.setup({

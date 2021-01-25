@@ -145,6 +145,8 @@ end
 " Golang related
 " Autoformat
 autocmd BufWritePre *.go lua goimports(2000)
+" Jump to Test files
+autocmd FileType go nnoremap <silent> gts <cmd>lua go_switch()<CR>
 
 " Ziglang related
 " Autoformatting
@@ -363,6 +365,11 @@ endif
 
 let g:vimtex_latexmk_continuous = 1
 
+" LaTeX bindings
+nnoremap <Leader>vc :VimtexCompile<CR>
+nnoremap <Leader>vi :VimtexTocToggle<CR>
+nnoremap <Leader>vp :VimtexView<CR> 
+
 " Markdown preview related
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
@@ -373,11 +380,6 @@ let g:mkdp_echo_preview_url = 1
 if empty(v:servername) && exists('*remote_startserver')
     call remote_startserver('VIM')
 endif
-
-" LaTeX bindings
-nnoremap <Leader>vc :VimtexCompile<CR>
-nnoremap <Leader>vi :VimtexTocToggle<CR>
-nnoremap <Leader>vp :VimtexView<CR> 
 
 " Completion plugin config
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
