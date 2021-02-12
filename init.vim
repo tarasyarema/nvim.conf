@@ -99,6 +99,10 @@ Plug 'vimwiki/vimwiki'
 " SageMath
 Plug 'petRUShka/vim-sage'
 
+" Js
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+
 call plug#end()
 
 let g:has_coc = 0
@@ -162,7 +166,9 @@ endif
 " Enable Clang auto fromatting on C based languages
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
-" ---------------------
+" Javascript formatting
+autocmd BufWritePre *.js :normal mpgg=G`p
+
 " General configuration
 " ---------------------
 
