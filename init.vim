@@ -103,6 +103,9 @@ Plug 'petRUShka/vim-sage'
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 
+" Python
+Plug 'fisadev/vim-isort'
+
 call plug#end()
 
 let g:has_coc = 0
