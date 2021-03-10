@@ -106,6 +106,9 @@ Plug 'maxmellon/vim-jsx-pretty'
 " Python
 Plug 'fisadev/vim-isort'
 
+" Elixir
+Plug 'elixir-lang/vim-elixir'
+
 call plug#end()
 
 let g:has_coc = 0
@@ -170,7 +173,7 @@ endif
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
 
 " Javascript formatting
-autocmd BufWritePre *.js :normal mpgg=G`p
+" autocmd BufWritePre *.js :normal mpgg=G`p
 
 " General configuration
 " ---------------------

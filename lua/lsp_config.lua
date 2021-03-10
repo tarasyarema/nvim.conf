@@ -127,3 +127,9 @@ nvim_lsp.texlab.setup({
 --   on_attach = custom_attach,
 -- })
 
+
+-- Elixir
+nvim_lsp.elixirls.setup({
+  cmd = {"/usr/local/bin/elixir-ls/language_server.sh"},
+  on_attach = custom_attach,
+})
