@@ -147,7 +147,7 @@ if g:use_nvim_lsp
 
     augroup NvimLSP
         autocmd!
-        autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
+        autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
         autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
     augroup END
 
