@@ -337,6 +337,8 @@ else
     let g:use_telescope = 0
 end
 
+let g:use_telescope = 1
+
 if g:use_telescope
 lua <<EOF
     require('telescope').setup{

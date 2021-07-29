@@ -21,7 +21,7 @@ local custom_attach = function(client)
 end
 
 -- Python
-nvim_lsp.pyls.setup({
+nvim_lsp.pylsp.setup({
   on_attach = custom_attach
 })
 
