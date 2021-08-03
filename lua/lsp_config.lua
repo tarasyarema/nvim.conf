@@ -164,9 +164,15 @@ nvim_lsp.html.setup{
 }
 
 -- Rust
-nvim_lsp.rust_analyzer.setup({
-  cmd = {"rust-analyzer"},
+nvim_lsp.rls.setup({
   on_attach = custom_attach,
+  settings = {
+    rust = {
+      unstable_features = true,
+      build_on_save = false,
+      all_features = true,
+    },
+  },
 })
 
 -- Clang
