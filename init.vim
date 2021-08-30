@@ -194,25 +194,30 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
-" Am I a joke to you?
-set background=dark
-
 " Theme :3
-colorscheme tender
+" set background=dark
+" colorscheme tender
 
 " colorscheme gruvbox
 " colorscheme nord
 " colorscheme srcery
 " colorscheme vim-monokai-tasty
 
+" Onehalf
+" set background=light
+" colorscheme onehalflight
+set background=dark
+colorscheme onehalfdark
+let g:airline_theme = 'onehalfdark'
+
 " Solarized config
-let g:solarized_termcolors=256
+" set background=light
+" let g:solarized_termtrans = 1
+" let g:solarized_termcolors = 256
 " colorscheme solarized
 
-
 " Airline theme
-let g:airline_theme = 'tender'
-
+" let g:airline_theme = 'tender'
 
 " Disable startup message
 set shortmess+=I
