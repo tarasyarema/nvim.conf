@@ -113,6 +113,15 @@ Plug 'elixir-lang/vim-elixir'
 " Prisma
 Plug 'pantharshit00/vim-prisma'
 
+" SQLx
+Plug 'andres-lowrie/vim-sqlx'
+
+" Code reviews
+Plug 'pwntester/octo.nvim'
+
+" Misc
+Plug 'kyazdani42/nvim-web-devicons'
+ 
 call plug#end()
 
 let g:has_coc = 0
@@ -324,7 +333,7 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <esc> :noh<return><esc>
 
 " NERD Tree
-map <Leader>a :NERDTreeToggle<CR>
+map <Leader>a :NERDTreeFind<CR>
 
 " Fuzzy related
 map <Leader>o :GFiles<CR>
@@ -342,7 +351,7 @@ else
     let g:use_telescope = 0
 end
 
-let g:use_telescope = 1
+let g:use_telescope = 0
 
 if g:use_telescope
 lua <<EOF
