@@ -395,7 +395,7 @@ if has("win32")
     let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 endif
 
-let g:vimtex_latexmk_continuous = 1
+" let g:vimtex_latexmk_continuous = 1
 
 " LaTeX bindings
 nnoremap <Leader>vc :VimtexCompile<CR>
