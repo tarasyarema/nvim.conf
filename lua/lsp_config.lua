@@ -1,5 +1,14 @@
 local nvim_lsp = require('lspconfig')
-local completion = require('completion')
+
+vim.g.coq_settings = { 
+  auto_start = 'shut-up',
+  completion = {
+    always = true
+  }
+}
+
+local coq = require("coq")
+-- local completion = require('completion')
 
 local status = require('lib.lsp_status')
 
@@ -10,30 +19,25 @@ end
 -- Turn on status.
 status.activate()
 
-local minimal_attach = function(client)
-  completion.on_attach(client)
-  status.on_attach(client)
-end
-
 local custom_attach = function(client)
-  completion.on_attach(client)
+  -- completion.on_attach(client)
   status.on_attach(client)
 end
 
 -- Python
-nvim_lsp.pylsp.setup({
+nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach
-})
+}))
 
 -- Golang
-nvim_lsp.gopls.setup({
+nvim_lsp.gopls.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
-})
+}))
 
 -- VimScript
-nvim_lsp.vimls.setup({
+nvim_lsp.vimls.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
-})
+}))
 
 -- Lua
 local sumneko_root_path
@@ -55,7 +59,7 @@ end
 -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
 local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
 
-nvim_lsp.sumneko_lua.setup({
+nvim_lsp.sumneko_lua.setup(coq.lsp_ensure_capabilities({
   cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
   settings = {
     Lua = {
@@ -79,7 +83,7 @@ nvim_lsp.sumneko_lua.setup({
     },
   },
   on_attach = custom_attach,
-})
+}))
 
 local eslint = {
   lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
@@ -91,16 +95,16 @@ local eslint = {
 }
 
 -- Typescript
-nvim_lsp.tsserver.setup {
+nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities({
   on_attach = function(client)
-    completion.on_attach(client)
+    -- completion.on_attach(client)
     status.on_attach(client)
     if client.config.flags then
       client.config.flags.allow_incremental_sync = true
     end
     client.resolved_capabilities.document_formatting = false
   end
-}
+}))
 
 local function eslint_config_exists()
   local eslintrc = vim.fn.glob(".eslintrc*", 0, 1)
@@ -152,17 +156,17 @@ end
 -- }
 
 -- Javascript static checker
-nvim_lsp.flow.setup{
+nvim_lsp.flow.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
-}
+}))
 
 -- HTML
-nvim_lsp.html.setup{
+nvim_lsp.html.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
-}
+}))
 
 -- Rust
-nvim_lsp.rls.setup({
+nvim_lsp.rls.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
   settings = {
     rust = {
@@ -171,36 +175,35 @@ nvim_lsp.rls.setup({
       all_features = true,
     },
   },
-})
+}))
 
 -- Clang
-nvim_lsp.clangd.setup({
+nvim_lsp.clangd.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
-})
+}))
 
 -- Json
-nvim_lsp.jsonls.setup({
+nvim_lsp.jsonls.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
-})
+}))
 
 -- PHP
-nvim_lsp.intelephense.setup({
+nvim_lsp.intelephense.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
-})
+}))
 
 -- LaTeX
-nvim_lsp.texlab.setup({
+nvim_lsp.texlab.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
-})
+}))
 
 -- Java
 -- nvim_lsp.jdtls.setup({
 --   on_attach = custom_attach,
 -- })
 
-
 -- Elixir
-nvim_lsp.elixirls.setup({
+nvim_lsp.elixirls.setup(coq.lsp_ensure_capabilities({
   cmd = {"/usr/local/bin/elixir-ls/language_server.sh"},
   on_attach = custom_attach,
-})
+}))

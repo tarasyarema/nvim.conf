@@ -23,6 +23,9 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'jacoborus/tender.vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'https://gitlab.com/yorickpeterse/vim-paper.git'
+Plug 'nikolvs/vim-sunbather'
+Plug 'mildewchan/takodachi.vim' 
 
 " Tree/directory explorer
 Plug 'preservim/nerdtree' 
@@ -73,14 +76,18 @@ Plug 'puremourning/vimspector'
 " Neovim built in LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 
 " Custom language related plugins
 Plug 'tjdevries/nlua.nvim'          " Lua development
 Plug 'nvim-lua/lsp-status.nvim'     " Lua statusline
 Plug 'euclidianAce/BetterLua.vim'   " Better lua
-Plug 'nvim-lua/completion-nvim'     " Better LSP completition
+" Plug 'nvim-lua/completion-nvim'     " Better LSP completition
 
 Plug 'ziglang/zig.vim'              " Zig language support
+
+" Go lang
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " C lang based formatting
 " By default it uses the Google style, if not .clang-format
@@ -107,6 +114,9 @@ Plug 'eslint/eslint'
 " Python
 Plug 'fisadev/vim-isort'
 
+" Dataform
+Plug 'andres-lowrie/vim-sqlx'
+
 " Elixir
 Plug 'elixir-lang/vim-elixir'
 
@@ -121,6 +131,9 @@ Plug 'pwntester/octo.nvim'
 
 " Misc
 Plug 'kyazdani42/nvim-web-devicons'
+
+" Go to Github line
+Plug 'ruanyl/vim-gh-line'
  
 call plug#end()
 
@@ -131,6 +144,10 @@ if g:has_coc
     elseif has("unix")
         source ~/.config/nvim/coc.vim
     endif
+endif
+
+if has("mac")
+    let g:python3_host_prog = expand('/usr/local/opt/python@3.8/bin/python3.8')
 endif
 
 " LSP related
@@ -204,20 +221,29 @@ if (has("termguicolors"))
 endif
 
 " Theme :3
-" set background=dark
-" colorscheme tender
+set background=dark
+colorscheme tender
+let g:airline_theme = 'tender'
 
-" colorscheme gruvbox
+" set background=dark
 " colorscheme nord
+" let g:airline_theme = 'nord'
+
+" set background=light
+" colorscheme sunbather
+" let g:airline_theme = 'sunbather'
+
 " colorscheme srcery
 " colorscheme vim-monokai-tasty
 
 " Onehalf
 " set background=light
 " colorscheme onehalflight
-set background=dark
-colorscheme onehalfdark
-let g:airline_theme = 'onehalfdark'
+" set background=dark
+" colorscheme gruvbox
+" let g:airline_theme = 'gruvbox'
+" colorscheme onehalfdark
+" let g:airline_theme = 'onehalfdark'
 
 " Solarized config
 " set background=light
@@ -226,7 +252,6 @@ let g:airline_theme = 'onehalfdark'
 " colorscheme solarized
 
 " Airline theme
-" let g:airline_theme = 'tender'
 
 " Disable startup message
 set shortmess+=I
@@ -401,6 +426,10 @@ endif
 nnoremap <Leader>vc :VimtexCompile<CR>
 nnoremap <Leader>vi :VimtexTocToggle<CR>
 nnoremap <Leader>vp :VimtexView<CR> 
+
+" Github link jump
+let g:gh_line_map = '<leader>gh'
+let g:gh_line_blame_map = '<leader>gb'
 
 " Markdown preview related
 let g:mkdp_auto_start = 0
