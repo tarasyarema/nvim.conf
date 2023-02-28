@@ -27,8 +27,13 @@ Plug 'https://gitlab.com/yorickpeterse/vim-paper.git'
 Plug 'nikolvs/vim-sunbather'
 Plug 'mildewchan/takodachi.vim' 
 
+Plug 'famiu/nvim-reload'
+
 " Tree/directory explorer
 Plug 'preservim/nerdtree' 
+
+" Tags in the current file
+Plug 'preservim/tagbar'
 
 " Autopairs
 Plug 'jiangmiao/auto-pairs'
@@ -113,6 +118,7 @@ Plug 'eslint/eslint'
 
 " Python
 Plug 'fisadev/vim-isort'
+Plug 'HallerPatrick/py_lsp.nvim'
 
 " Dataform
 Plug 'andres-lowrie/vim-sqlx'
@@ -134,7 +140,15 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 " Go to Github line
 Plug 'ruanyl/vim-gh-line'
- 
+
+" Lisp
+Plug 'vlime/vlime', {'rtp': 'vim/'}
+Plug 'bhurlow/vim-parinfer'
+
+" Lsp diagnostics
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
+
 call plug#end()
 
 let g:has_coc = 0
@@ -146,9 +160,9 @@ if g:has_coc
     endif
 endif
 
-if has("mac")
-    let g:python3_host_prog = expand('/usr/local/opt/python@3.8/bin/python3.8')
-endif
+" if has("mac")
+"     let g:python3_host_prog = expand('/usr/local/opt/python@3.8/bin/python3.8')
+" endif
 
 " LSP related
 lua require('init')
@@ -174,7 +188,7 @@ if g:use_nvim_lsp
     augroup NvimLSP
         autocmd!
         autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
-        autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
+        " autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
     augroup END
 
     " Custom LSP diagnostics signs
@@ -359,6 +373,7 @@ nnoremap <esc> :noh<return><esc>
 
 " NERD Tree
 map <Leader>a :NERDTreeFind<CR>
+nmap <Leader>t :TagbarToggle<CR>
 
 " Fuzzy related
 map <Leader>o :GFiles<CR>
@@ -420,8 +435,6 @@ if has("win32")
     let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 endif
 
-" let g:vimtex_latexmk_continuous = 1
-
 " LaTeX bindings
 nnoremap <Leader>vc :VimtexCompile<CR>
 nnoremap <Leader>vi :VimtexTocToggle<CR>
@@ -460,3 +473,15 @@ if has("win32")
     let g:languagetool_jar = "S:/Programs/LanguageTool-5.1/languagetool-commandline.jar"
     let g:languagetool_lang = "ca"
 end
+
+" Lisp Vlime config
+let g:vlime_enable_autodoc = v:true
+let g:vlime_window_settings = {'sldb': {'pos': 'belowright', 'vertical': v:true}, 'inspector': {'pos': 'belowright', 'vertical': v:true}, 'preview': {'pos': 'belowright', 'size': v:null, 'vertical': v:true}}
+
+" Lsp Disagnostics
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+" nnoremap gR <cmd>TroubleToggle lsp_references<cr>

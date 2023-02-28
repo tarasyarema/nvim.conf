@@ -1,5 +1,10 @@
 local nvim_lsp = require('lspconfig')
 
+local configs = require('lspconfig/configs')
+local util = require('lspconfig/util')
+
+local path = util.path
+
 vim.g.coq_settings = { 
   auto_start = 'shut-up',
   completion = {
@@ -12,8 +17,35 @@ local coq = require("coq")
 
 local status = require('lib.lsp_status')
 
+require("trouble").setup {}
+
 local mapper = function(mode, key, result)
   vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
+end
+
+local function get_python_path(workspace)
+  -- Use activated virtualenv.
+  if vim.env.VIRTUAL_ENV then
+    return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+  end
+
+  local match = vim.fn.glob(path.join(workspace, 'pyproject.toml'))
+
+  print(workspace)
+  print(match)
+
+  if match ~= '' then
+    local venv = vim.fn.trim(vim.fn.system('poetry env info -p'))
+    local new_path = path.join(venv, 'bin', 'python')
+
+    print(venv)
+    print(new_path)
+
+    return new_path
+  end
+
+  -- Fallback to system Python.
+  return exepath('python3') or exepath('python') or 'python'
 end
 
 -- Turn on status.
@@ -25,9 +57,13 @@ local custom_attach = function(client)
 end
 
 -- Python
-nvim_lsp.pylsp.setup(coq.lsp_ensure_capabilities({
+nvim_lsp.pyright.setup({
+  on_init = function(client)
+    local root_dir = client.config.root_dir
+    client.config.settings.python.pythonPath = get_python_path(root_dir)
+  end,
   on_attach = custom_attach
-}))
+})
 
 -- Golang
 nvim_lsp.gopls.setup(coq.lsp_ensure_capabilities({
@@ -98,11 +134,13 @@ local eslint = {
 nvim_lsp.tsserver.setup(coq.lsp_ensure_capabilities({
   on_attach = function(client)
     -- completion.on_attach(client)
-    status.on_attach(client)
+    -- status.on_attach(client)
+
     if client.config.flags then
       client.config.flags.allow_incremental_sync = true
     end
-    client.resolved_capabilities.document_formatting = false
+
+    client.server_capabilities.documentFormattingProvider = false
   end
 }))
 
@@ -166,15 +204,25 @@ nvim_lsp.html.setup(coq.lsp_ensure_capabilities({
 }))
 
 -- Rust
-nvim_lsp.rls.setup(coq.lsp_ensure_capabilities({
+nvim_lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({
   on_attach = custom_attach,
   settings = {
-    rust = {
-      unstable_features = true,
-      build_on_save = false,
-      all_features = true,
-    },
-  },
+    ["rust-analyzer"] = {
+      assist = {
+        importPrefix = "by_self",
+      },
+      cargo = {
+        allFeatures = true,
+      },
+      checkOnSave = {
+        command = "clippy",
+      },
+      lens = {
+        references = true,
+        methodReferences = true,
+      },
+    }
+  }
 }))
 
 -- Clang
