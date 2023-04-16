@@ -81,7 +81,15 @@ Plug 'puremourning/vimspector'
 " Neovim built in LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/lsp_extensions.nvim'
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'williamboman/mason.nvim', {'do': ':MasonUpdate'} 
+Plug 'williamboman/mason-lspconfig.nvim'              
+
+" Autocompletion
+Plug 'hrsh7th/nvim-cmp'     
+Plug 'hrsh7th/cmp-nvim-lsp' 
+Plug 'L3MON4D3/LuaSnip'     
+
+Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
 
 " Custom language related plugins
 Plug 'tjdevries/nlua.nvim'          " Lua development
@@ -149,6 +157,16 @@ Plug 'bhurlow/vim-parinfer'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'folke/trouble.nvim'
 
+" Copilot
+Plug 'github/copilot.vim'
+
+" Testillos
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.1' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
 call plug#end()
 
 let g:has_coc = 0
@@ -187,7 +205,7 @@ if g:use_nvim_lsp
 
     augroup NvimLSP
         autocmd!
-        autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
+        " autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
         " autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
     augroup END
 
@@ -253,9 +271,12 @@ let g:airline_theme = 'tender'
 " Onehalf
 " set background=light
 " colorscheme onehalflight
+
 " set background=dark
 " colorscheme gruvbox
 " let g:airline_theme = 'gruvbox'
+
+" set background=dark
 " colorscheme onehalfdark
 " let g:airline_theme = 'onehalfdark'
 
@@ -375,35 +396,36 @@ nnoremap <esc> :noh<return><esc>
 map <Leader>a :NERDTreeFind<CR>
 nmap <Leader>t :TagbarToggle<CR>
 
+" Terminal
+nnoremap <leader>vt :vsplit term://zsh<cr>
+tnoremap <esc> <C-\><C-n>
+
+lua require("toggleterm").setup()
+
+" set
+autocmd TermEnter term://*toggleterm#*
+      \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+" By applying the mappings this way you can pass a count to your
+" mapping to open a specific window.
+" For example: 2<C-t> will open terminal 2
+nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
+nnoremap <silent><c-g> <Cmd>lua _gitui_toggle()<CR>
+
 " Fuzzy related
-map <Leader>o :GFiles<CR>
-map <Leader>O :tabnew<CR>:GFiles<CR>
-map <Leader>p :Files<CR>
-map <Leader>rg :Rg<SPACE>
+" map <Leader>o :GFiles<CR>
+" map <Leader>O :tabnew<CR>:GFiles<CR>
+" map <Leader>p :Files<CR>
+" map <Leader>rg :Rg<SPACE>
 
-" Telescope config
-if has("win32")
-    " Now this plugin is slower than Fzf...
-    " so I'm only using it on the Windows machine
-    " as speed is not affected here
-    let g:use_telescope = 1
-else
-    let g:use_telescope = 0
-end
+lua require('telescope').load_extension('fzf')
 
-let g:use_telescope = 0
-
-if g:use_telescope
-lua <<EOF
-    require('telescope').setup{
-        defaults = {}
-    }
-EOF
-
-    map <Leader>o :lua require'telescope.builtin'.git_files{}<CR>
-    map <Leader>O :tabnew<CR>:lua require'telescope.builtin'.git_files{}<CR>
-    map <Leader>p :lua require'telescope.builtin'.find_files{}<CR>
-end
+nnoremap <leader>o <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>O :tabnew<cr><cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>rg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " Copy/Paste remaps
 " Do not work under WSL

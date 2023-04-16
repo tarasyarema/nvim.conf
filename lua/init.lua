@@ -9,5 +9,7 @@ return init({
     packages = {
         'lsp_config',
         'go',
+        'finder',
+        'terminal',
     }
 })
