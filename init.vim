@@ -3,7 +3,8 @@
 call plug#begin()
 
 " Status bar
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Fuzzy search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -82,12 +83,13 @@ Plug 'puremourning/vimspector'
 Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'williamboman/mason.nvim', {'do': ':MasonUpdate'} 
-Plug 'williamboman/mason-lspconfig.nvim'              
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Autocompletion
-Plug 'hrsh7th/nvim-cmp'     
-Plug 'hrsh7th/cmp-nvim-lsp' 
-Plug 'L3MON4D3/LuaSnip'     
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'
 
 Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
 
@@ -169,19 +171,6 @@ Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
 call plug#end()
 
-let g:has_coc = 0
-if g:has_coc
-    if has("win32")
-        source ~\AppData\Local\nvim\coc.vim
-    elseif has("unix")
-        source ~/.config/nvim/coc.vim
-    endif
-endif
-
-" if has("mac")
-"     let g:python3_host_prog = expand('/usr/local/opt/python@3.8/bin/python3.8')
-" endif
-
 " LSP related
 lua require('init')
 
@@ -205,6 +194,7 @@ if g:use_nvim_lsp
 
     augroup NvimLSP
         autocmd!
+        autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
         " autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
         " autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
     augroup END
@@ -223,12 +213,6 @@ autocmd FileType go nnoremap <silent> gts <cmd>lua go_switch()<CR>
 " Ziglang related
 " Autoformatting
 let g:zig_fmt_autosave = 1
-
-" Python related
-" Windows shit
-if has("win32")
-    let g:python3_host_prog = 'C:\Users\2pac\scoop\apps\python\current\python.EXE'
-endif
 
 " C/C++ related
 " Enable Clang auto fromatting on C based languages
@@ -286,8 +270,6 @@ let g:airline_theme = 'tender'
 " let g:solarized_termcolors = 256
 " colorscheme solarized
 
-" Airline theme
-
 " Disable startup message
 set shortmess+=I
 
@@ -321,8 +303,8 @@ set mouse+=a
 set noshowmode
 
 set cmdheight=1
-set showmatch  
-set hidden     
+set showmatch
+set hidden
 
 set completeopt-=preview
 
@@ -334,7 +316,7 @@ set updatetime=1000
 set hlsearch
 
 " Make it so there are always ten lines below my cursor
-set scrolloff=10 
+set scrolloff=10
 
 " Tabs
 " Want auto indents automatically
@@ -450,13 +432,6 @@ noremap <C-p> gT
 let g:tex_flavor = 'latex'
 let g:vimtex_mappings_enabled = 0
 
-" for Windows
-if has("win32")
-    let g:vimtex_view_general_viewer = 'SumatraPDF'
-    let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
-    let g:vimtex_view_general_options_latexmk = '-reuse-instance'
-endif
-
 " LaTeX bindings
 nnoremap <Leader>vc :VimtexCompile<CR>
 nnoremap <Leader>vi :VimtexTocToggle<CR>
@@ -489,12 +464,6 @@ set shortmess+=c " Avoid showing message extra message when using completion
 " GUI options
 " set guifont=MesloLGLDZ_Nerd_Font_Mono:h15
 set guifont=Consolas:h16
-
-" LanguageTool settings
-if has("win32")
-    let g:languagetool_jar = "S:/Programs/LanguageTool-5.1/languagetool-commandline.jar"
-    let g:languagetool_lang = "ca"
-end
 
 " Lisp Vlime config
 let g:vlime_enable_autodoc = v:true
