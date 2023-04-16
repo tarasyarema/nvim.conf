@@ -11,5 +11,6 @@ return init({
         'go',
         'finder',
         'terminal',
+        'tree',
     }
 })

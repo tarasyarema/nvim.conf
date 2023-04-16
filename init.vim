@@ -31,10 +31,12 @@ Plug 'mildewchan/takodachi.vim'
 Plug 'famiu/nvim-reload'
 
 " Tree/directory explorer
-Plug 'preservim/nerdtree' 
+" Plug 'preservim/nerdtree' 
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
 
 " Tags in the current file
-Plug 'preservim/tagbar'
+" Plug 'preservim/tagbar'
 
 " Autopairs
 Plug 'jiangmiao/auto-pairs'
@@ -128,7 +130,7 @@ Plug 'eslint/eslint'
 
 " Python
 Plug 'fisadev/vim-isort'
-Plug 'HallerPatrick/py_lsp.nvim'
+" Plug 'HallerPatrick/py_lsp.nvim'
 
 " Dataform
 Plug 'andres-lowrie/vim-sqlx'
@@ -174,35 +176,31 @@ call plug#end()
 " LSP related
 lua require('init')
 
-let g:use_nvim_lsp = 1
+setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-if g:use_nvim_lsp
-    setlocal omnifunc=v:lua.vim.lsp.omnifunc
+nnoremap <silent> gd            <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gD            <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> gdd           <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> K             <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <c-k>         <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD           <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr            <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gR            <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> g0            <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW            <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> <Leader>[     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_next_diagnostic()<CR>
+nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_prev_diagnostic()<CR>
 
-    nnoremap <silent> gd            <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <silent> gD            <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap <silent> gdd           <cmd>lua vim.lsp.buf.declaration()<CR>
-    nnoremap <silent> K             <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <silent> <c-k>         <cmd>lua vim.lsp.buf.signature_help()<CR>
-    nnoremap <silent> 1gD           <cmd>lua vim.lsp.buf.type_definition()<CR>
-    nnoremap <silent> gr            <cmd>lua vim.lsp.buf.references()<CR>
-    nnoremap <silent> gR            <cmd>lua vim.lsp.buf.rename()<CR>
-    nnoremap <silent> g0            <cmd>lua vim.lsp.buf.document_symbol()<CR>
-    nnoremap <silent> gW            <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-    nnoremap <silent> <Leader>[     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_next_diagnostic()<CR>
-    nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_prev_diagnostic()<CR>
+augroup NvimLSP
+    autocmd!
+    autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
+    " autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
+    " autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
+augroup END
 
-    augroup NvimLSP
-        autocmd!
-        autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
-        " autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
-        " autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
-    augroup END
-
-    " Custom LSP diagnostics signs
-    " sign define LspDiagnosticsErrorSign text=E linehl=ErrorMsg texthl=LspDiagnosticsError numhl=
-    " sign define LspDiagnosticsWarningSign text=W linehl=MoreMsg texthl=LspDiagnosticsWarningSign numhl=
-end
+" Custom LSP diagnostics signs
+" sign define LspDiagnosticsErrorSign text=E linehl=ErrorMsg texthl=LspDiagnosticsError numhl=
+" sign define LspDiagnosticsWarningSign text=W linehl=MoreMsg texthl=LspDiagnosticsWarningSign numhl=
 
 " Golang related
 " Autoformat
@@ -375,8 +373,11 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <esc> :noh<return><esc>
 
 " NERD Tree
-map <Leader>a :NERDTreeFind<CR>
-nmap <Leader>t :TagbarToggle<CR>
+" map <Leader>a :NERDTreeFind<CR>
+" nmap <Leader>t :TagbarToggle<CR>
+
+" Nvim Tree
+map <Leader>a :NvimTreeFindFile<CR>
 
 " Terminal
 nnoremap <leader>vt :vsplit term://zsh<cr>
