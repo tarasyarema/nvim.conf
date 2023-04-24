@@ -219,11 +219,6 @@ autocmd FileType c,cpp,objc ClangFormatAutoEnable
 " Javascript formatting
 " autocmd BufWritePre *.js :normal mpgg=G`p
 
-" Copilot
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
-highlight CopilotSuggestion guifg=#555555 ctermfg=8
-
 
 " General configuration
 " ---------------------
@@ -483,3 +478,13 @@ nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
 nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
 nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
 " nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+
+" Copilot
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+imap <C-=> <Plug>(copilot-next)
+imap <C--> <Plug>(copilot-previous)
+imap <C-\> <Plug>(copilot-suggest)
+
+let g:copilot_no_tab_map = v:true
+
+highlight CopilotSuggestion guifg=#555555 ctermfg=8
