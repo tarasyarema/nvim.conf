@@ -193,7 +193,7 @@ nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_
 
 augroup NvimLSP
     autocmd!
-    " autocmd BufWritePre *.py,*.rs,*.ex lua vim.lsp.buf.formatting_sync(nil, 2000)
+    " autocmd BufWritePre *.py,*.rs,*.ex,*.go lua vim.lsp.buf.format({ async = false })
     " autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
     " autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
 augroup END
@@ -204,7 +204,7 @@ augroup END
 
 " Golang related
 " Autoformat
-autocmd BufWritePre *.go lua goimports(2000)
+" autocmd BufWritePre *.go lua goimports(2000)
 " Jump to Test files
 autocmd FileType go nnoremap <silent> gts <cmd>lua go_switch()<CR>
 

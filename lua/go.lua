@@ -15,7 +15,7 @@ function goimports(timeoutms)
         end
     end
 
-    vim.lsp.buf.formatting()
+    vim.lsp.buf.format({ async = false })
 end
 
 function go_switch()
