@@ -19,10 +19,10 @@ lsp.ensure_installed({
 lsp.format_on_save({
 	servers = {
 		["gopls"] = { "go" },
-		["eslint"] = { "javascript" },
 		["lua_ls"] = { "lua" },
-		["tsserver"] = { "typescript" },
 		["rust_analyzer"] = { "rust" },
+		-- ["eslint"] = { "javascript" },
+		-- ["eslint"] = { "typescript" },
 	},
 })
 
