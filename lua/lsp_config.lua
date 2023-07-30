@@ -13,6 +13,8 @@ lsp.ensure_installed({
 	'pyright',
 	'gopls',
 	'tsserver',
+	'eslint',
+	'stylelint_lsp',
 	'rust_analyzer',
 })
 
@@ -21,8 +23,11 @@ lsp.format_on_save({
 		["gopls"] = { "go" },
 		["lua_ls"] = { "lua" },
 		["rust_analyzer"] = { "rust" },
-		-- ["eslint"] = { "javascript" },
-		-- ["eslint"] = { "typescript" },
+		["eslint"] = {
+			"javascript",
+			"typescript",
+			"typescriptreact"
+		},
 	},
 })
 

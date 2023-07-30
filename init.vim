@@ -193,6 +193,7 @@ nnoremap <silent> <Leader>]     <cmd>lua vim.lsp.strutures.Diagnostics.buf_move_
 
 augroup NvimLSP
     autocmd!
+    autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
     " autocmd BufWritePre *.py,*.rs,*.ex,*.go lua vim.lsp.buf.format({ async = false })
     " autocmd BufWritePre *.py,*.rs,*.ex,*.js,*.ts lua vim.lsp.buf.formatting_sync(nil, 2000)
     " autocmd BufEnter,BufWritePost *.rs lua require('lsp_extensions.inlay_hints').request { aligned = true, prefix = " » " }
