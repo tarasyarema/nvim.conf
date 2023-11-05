@@ -23,6 +23,7 @@ lsp.format_on_save({
 		["gopls"] = { "go" },
 		["lua_ls"] = { "lua" },
 		["rust_analyzer"] = { "rust" },
+		["pyright"] = { "python" },
 		["eslint"] = {
 			"javascript",
 			"typescript",
